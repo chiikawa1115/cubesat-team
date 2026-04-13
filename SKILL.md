@@ -72,10 +72,17 @@ user-invocable: true
 - 結果：2/2 Approve = 通過；任何 Reject = 退回 backlog rework
 
 ### `/budget-check`
-PM agent 執行 BOM 估價：
-- 讀取 references/cots-components.md 取得零件清單
-- 使用 WebSearch 查詢 DigiKey 即時報價
-- 產出 BOM 成本摘要 + 與預算上限比較
+PM agent：完整預算查詢（硬體 + 人事 + 差旅 + 發射 + 測試 + 保險 + 預備金）：
+- 讀取 references/cots-components.md 取得元件規格與概估價
+- 使用 scripts/budget_manager.py 管理所有經費類別
+- 產出完整預算摘要（各類別小計 + 總計）+ 與預算上限比較
+- 硬體部分可搭配 WebSearch 查 DigiKey 即時報價
+
+### `/discuss`
+查看/回覆 agent 間的討論串，處理 action items：
+- 使用 scripts/collab.py 管理討論
+- 列出所有 open threads 和待回覆的 action items
+- 回覆指定 thread 或建立新討論
 
 ### `/ceo-report`
 產出 25 頁 CEO 報告：
@@ -131,6 +138,24 @@ PM agent 執行 BOM 估價：
 
 ---
 
+## Agent 協作機制
+
+Agent 間透過 `workspace/discussions.json` 進行非同步討論：
+- 任何 agent 可以開啟討論串（thread）向其他 agent 提問或提出疑慮
+- 被 tag 的 agent 必須在下一次被召喚時回覆
+- 討論串狀態：open → resolved / blocked
+- `/discuss` 指令可查看所有 open threads 和待回覆的 action items
+- 設計審查和 Peer Review 的意見也會記錄在討論串中
+- 使用 `scripts/collab.py` 管理討論
+
+### 協作流程範例
+1. Comm Payload 發現 Link Budget margin 不足 → 開 thread 給 SE
+2. SE 檢查 power budget → 回覆建議增加天線增益
+3. Comm Payload 更新天線規格 → 回覆確認 margin 足夠
+4. SE resolve thread → 雙方同意的設計變更記錄在案
+
+---
+
 ## 知識庫指引
 
 `references/` 目錄下的知識文件，各 agent 應依情境主動查閱：
@@ -143,7 +168,8 @@ PM agent 執行 BOM 估價：
 | comm-design.md | DVB-S2X、NTN 架構、SDR/FPGA 通訊酬載 | 通訊酬載設計、Link Budget |
 | industry-landscape.md | Starlink/Kuiper/OneWeb 分析、TASA B5G 計畫 | 產業分析、競爭定位 |
 | course-rubric.md | 課程評分標準、大綱、教師資訊 | 報告規劃、確保符合評分要求 |
-| cots-components.md | COTS 零件清單 + DigiKey 連結 | BOM 估價、零件選型 |
+| cots-components.md | COTS 元件規格參考（規格導向，不綁料號） | 元件選型、規格比對 |
+| budget-reference.md | CubeSat 任務經費參考數據（發射/測試/人事） | 預算估算、經費規劃 |
 | pdf-paths.md | 原始 PDF 路徑 + 頁碼索引 | 需要深入查閱原始教材時 |
 
 ---
@@ -177,7 +203,7 @@ PM agent 執行 BOM 估價：
 1. **Agent 隔離** — 所有 agent 間交互使用 Agent tool (subagent) 隔離，確保獨立推理
 2. **語言** — 回覆使用繁體中文，技術術語保留英文（如 DVB-S2X, Link Budget, V-model）
 3. **知識來源** — 專業知識優先參考 TASA 詹鎮宇研究員教材（見 pdf-paths.md），次要來源為 WebSearch
-4. **BOM 估價** — PM 估價必須查 DigiKey 即時報價，不得憑空估算
+4. **預算管理** — PM 使用 scripts/budget_manager.py 管理完整預算；硬體估價查 DigiKey 即時報價，其他類別參考 references/budget-reference.md
 5. **Peer Review Gate** — 每個交付物必須通過 P2P Review Gate，無例外
 6. **Google Docs 輸出** — CEO 報告推送至 ruru851115@gmail.com 的 Google Docs
 7. **Backlog 驅動** — 所有工作項目必須在 backlog 中追蹤，不得有「影子任務」

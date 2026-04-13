@@ -1,50 +1,70 @@
-# CubeSat COTS 元件參考
+# CubeSat 元件規格參考
 
-> 常用 CubeSat COTS 元件清單，含 DigiKey 搜尋關鍵字
+> 以規格需求為導向，不綁定特定料號
 
 ## OBC（On-Board Computer）
-| 元件 | 廠商 | 搜尋關鍵字 | 參考價 |
-|------|------|-----------|--------|
-| STM32H743 | ST | `STM32H743VIT6 digikey` | ~$15 |
-| Raspberry Pi CM4 | RPi | `Raspberry Pi CM4 digikey` | ~$35 |
-| Zynq-7020 | AMD/Xilinx | `XC7Z020-1CLG484C digikey` | ~$150 |
+| 規格項目 | 需求 | 參考等級 | 概估價 |
+|---------|------|---------|--------|
+| 處理器 | ARM Cortex-A9+ 或同等 | Zynq-7000 class | ~$150 |
+| FPGA | ≥50K LUT, 內建 DSP | Artix/Zynq class | included |
+| 溫度範圍 | -40°C ~ 85°C (工業級) | | |
+| 介面 | SPI, CAN, UART, SpaceWire | | |
+| 功耗 | <5W | | |
 
-## 通訊模組
-| 元件 | 頻段 | 搜尋關鍵字 | 參考價 |
-|------|------|-----------|--------|
-| CC1125 | UHF | `CC1125RHBR digikey` | ~$5 |
-| ISIS UHF Transceiver | UHF 435 MHz | `ISIS CubeSat transceiver` | ~$5,000 |
-| Endurosat S-band | S-band | `Endurosat S-band transmitter` | ~$8,000 |
+## 通訊子系統
+### TT&C
+| 規格項目 | 需求 | 參考等級 | 概估價 |
+|---------|------|---------|--------|
+| 頻段 | UHF 435 MHz | ISIS class | ~$5,000 |
+| 資料率 | ≥9600 bps | | |
+| 發射功率 | ≥1W | | |
+| 協定 | AX.25 or CCSDS | | |
+
+### SDR 酬載
+| 規格項目 | 需求 | 參考等級 | 概估價 |
+|---------|------|---------|--------|
+| 頻段 | Ka-band (27.5-30 GHz UL / 17.7-20.2 GHz DL) | CesiumAstro Vireo class | ~$50,000+ |
+| 頻寬 | ≥250 MHz | | |
+| ADC | ≥14-bit, ≥5 Gs/s | RFSoC class | ~$3,000 |
+| DAC | ≥14-bit, ≥10 Gs/s | | included |
+| 調變 | DVB-S2X (up to 256-APSK) | | |
+| SD-FEC | 內建 LDPC+BCH | | |
 
 ## ADCS
-| 元件 | 類型 | 搜尋關鍵字 | 參考價 |
-|------|------|-----------|--------|
-| CubeSpace CubeADCS | 整合模組 | `CubeSpace ADCS` | ~$15,000 |
-| NewSpace ADCS | 整合模組 | `NewSpace Systems ADCS` | ~$12,000 |
-| BMX160 | IMU | `BMX160 digikey` | ~$3 |
+| 規格項目 | 需求 | 參考等級 | 概估價 |
+|---------|------|---------|--------|
+| 控制模式 | 3-axis stabilized | CubeSpace class | ~$15,000 |
+| 指向精度 | ≤±0.5° | | |
+| 感測器 | 星追蹤器 + 太陽感測器 + 磁力計 + 陀螺儀 | | |
+| 致動器 | 反應輪 (3+1) + 磁扭器 (3) | | |
 
-## 太陽能板 & EPS
-| 元件 | 類型 | 搜尋關鍵字 | 參考價 |
-|------|------|-----------|--------|
-| Clyde Space 3G EPS | EPS | `Clyde Space EPS CubeSat` | ~$8,000 |
-| Endurosat Solar Panel | 1U面板 | `Endurosat solar panel` | ~$2,000 |
-| SPV1040 | MPPT IC | `SPV1040T digikey` | ~$4 |
+## EPS（電力子系統）
+| 規格項目 | 需求 | 參考等級 | 概估價 |
+|---------|------|---------|--------|
+| 太陽能板 | ≥7W BOL per panel (3U body-mounted) | Endurosat class | ~$2,000/panel |
+| 電池 | Li-ion, ≥20Wh | 18650 cells | ~$500 |
+| MPPT | ≥90% efficiency | SPV1040 class | ~$100 |
+| 匯流排電壓 | 3.3V / 5V / 12V regulated | | |
+| 總功率需求 | ≥30W (peak), ≥15W (average) | | |
 
 ## 結構
-| 元件 | 類型 | 搜尋關鍵字 | 參考價 |
-|------|------|-----------|--------|
-| ISIS CubeSat Structure | 框架 | `ISIS CubeSat structure kit` | ~$3,000 |
-| Pumpkin CubeSat Kit | 框架 | `Pumpkin CubeSat kit` | ~$4,000 |
+| 規格項目 | 需求 | 參考等級 | 概估價 |
+|---------|------|---------|--------|
+| 構型 | 3U (10x10x30 cm) | ISIS/Pumpkin class | ~$3,000 |
+| 質量上限 | 4.0 kg | | |
+| 材料 | Al 7075-T6 or 6061-T6 | | |
+| 展開機構 | 太陽能板 x2 (deployable) | | ~$1,500 |
 
-## 感測器
-| 元件 | 類型 | 搜尋關鍵字 | 參考價 |
-|------|------|-----------|--------|
-| NSS CubeStar | 星追蹤器 | `NewSpace Star Tracker` | ~$10,000 |
-| SS-411 | 太陽感測器 | `Sinclair Interplanetary sun sensor` | ~$1,500 |
-| HMC5883L | 磁力計 | `HMC5883L digikey` | ~$3 |
+## 感測器（獨立採購）
+| 規格項目 | 需求 | 參考等級 | 概估價 |
+|---------|------|---------|--------|
+| 磁力計 | 3-axis, ±8 Gauss | HMC5883L class | ~$3 |
+| IMU | 6-DOF, gyro ≤0.01°/hr | BMX160 class | ~$3 |
+| GPS 接收器 | LEO compatible, ≤10m accuracy | | ~$500 |
+| 溫度感測 | x8 points, ±0.5°C | PT100/thermistor | ~$50 |
 
 ## 估價注意事項
-- 以上參考價為概估，PM 須用 WebSearch 查 DigiKey 即時報價
-- CubeSat COTS 元件部分不在 DigiKey，需查專業供應商（ISIS、Endurosat、CubeSpace）
-- 學術/教育折扣可能適用
-- 備用品至少準備 1 套
+- 以上為概估價，實際採購需查 DigiKey 或專業 CubeSat 供應商
+- 專業 CubeSat 模組（ADCS、EPS、TT&C）通常不在 DigiKey，需直接聯繫廠商
+- 規格為最低需求，選型時考慮 margin
+- 教育/研究折扣可能適用

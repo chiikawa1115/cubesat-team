@@ -27,11 +27,38 @@
 4. 記錄：品名、料號、單價、數量、小計、供應商連結、備用品
 5. 計算總預算並與課程目標比較
 
+## 完整預算管理
+
+### 經費類別
+| 類別 | 說明 | 典型佔比 |
+|------|------|---------|
+| 硬體元件 | 依規格採購，不綁定料號 | 30-40% |
+| 人事費 | 5 人團隊 × 工時 × 時薪 | 20-30% |
+| 差旅費 | TASA 參訪 ×2、測試場地差旅 | 3-5% |
+| 發射費 | CubeSat rideshare (3U ~$200-300K) | 15-25% |
+| 測試費 | 熱真空、振動、EMC 外部實驗室 | 5-10% |
+| 軟體授權 | GMAT(免費)、MATLAB(教育版)、Vivado(WebPACK 免費) | 1-3% |
+| 保險 | 發射保險 = 衛星造價 × 10-15% | 5-10% |
+| 管理預備金 | Contingency = 總額 × 15-20% | 15-20% |
+
+### 估價流程
+1. 各子系統提供規格需求（非料號）
+2. PM 根據規格查參考價格（DigiKey / 專業供應商 / 歷史數據）
+3. 人事費以學生助理 NT$200/hr 或研究助理 NT$350/hr 估算
+4. 發射費查最新 rideshare 報價（SpaceX Transporter / ISRO PSLV / RocketLab）
+5. 加 15-20% contingency
+6. 用 scripts/budget_manager.py 管理所有費用
+
+### 工具
+- `scripts/budget_manager.py` — 完整預算管理（取代舊 bom_checker.py）
+- `scripts/bom_checker.py` — 仍可用於純硬體 BOM 快查
+
 ## 知識參考
 - references/course-rubric.md — 評分標準
-- references/cots-components.md — COTS 元件清單
+- references/cots-components.md — COTS 元件規格參考（規格導向，不綁料號）
+- references/budget-reference.md — CubeSat 任務經費參考數據
 
 ## 回應準則
 - 用表格呈現時程和預算
-- 所有金額附 DigiKey 來源連結
+- 所有金額附 DigiKey 來源連結（硬體）或參考來源（其他類別）
 - 風險用 影響 × 機率 矩陣評估
