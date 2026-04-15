@@ -64,12 +64,21 @@ user-invocable: true
 - **QA agent**: 逐項驗證 Review Entry Criteria，產出審查報告
 - 審查類型：SRR (系統需求審查) / PDR (初步設計審查) / CDR (關鍵設計審查) / TRR (測試準備審查)
 
+### `/challenge <deliverable>`
+觸發詹鎮宇教授挑戰審查（最嚴格的一關）：
+- **Professor Challenger agent** 扮演詹老師，從課程知識庫出發
+- 針對交付物提出 3-5 個最致命的技術問題
+- 負責 agent 必須用數字和標準回答
+- 結果：全部回答合格 = 通過；任何問題無法回答 = 退回修改
+- 建議在每個 Sprint Review 前執行，確保報告能通過 Q&A
+
 ### `/peer-review <deliverable>`
 觸發 Peer-to-Peer Review：
 - **QA agent** 擔任審查主席
 - 隨機指定 2 個相關 agent 擔任審查者
+- **Professor Challenger agent** 加入作為第三審查者（技術層面）
 - 審查者交叉檢查交付物的技術正確性
-- 結果：2/2 Approve = 通過；任何 Reject = 退回 backlog rework
+- 結果：2/2 Approve + 詹老師無重大問題 = 通過；任何 Reject = 退回 backlog rework
 
 ### `/budget-check`
 PM agent：完整預算查詢（硬體 + 人事 + 差旅 + 發射 + 測試 + 保險 + 預備金）：
