@@ -1,0 +1,90 @@
+[
+  {
+    "id": "B-001",
+    "title": "Link Budget v2",
+    "sprint": 2,
+    "wave": 2,
+    "owner": "Comm Agent（林志遠）",
+    "status": "done"
+  },
+  {
+    "id": "B-002",
+    "title": "System Architecture + ICD v1",
+    "sprint": 2,
+    "wave": 1,
+    "owner": "SE Agent（陳建宏）",
+    "status": "done"
+  },
+  {
+    "id": "B-003",
+    "title": "PDR Package v1",
+    "sprint": 2,
+    "wave": 3,
+    "owner": "SE Agent（陳建宏）+ QA Agent（林宜靜）",
+    "status": "done"
+  },
+  {
+    "id": "B-004",
+    "title": "Mass Budget v2",
+    "sprint": 2,
+    "wave": 2,
+    "owner": "Mech Agent（吳建宇）",
+    "status": "done"
+  },
+  {
+    "id": "B-005",
+    "title": "Power Budget v2",
+    "sprint": 2,
+    "wave": 1,
+    "owner": "SE Agent（陳建宏）",
+    "status": "done"
+  },
+  {
+    "id": "B-006",
+    "title": "ADCS Trade Study v1",
+    "sprint": 2,
+    "wave": 2,
+    "owner": "AOCS Agent（黃俊誠）",
+    "status": "done"
+  },
+  {
+    "id": "B-007",
+    "title": "OBC/FPGA Architecture v1",
+    "sprint": 2,
+    "wave": 2,
+    "owner": "SW/FW Agent（徐志豪）",
+    "status": "done"
+  },
+  {
+    "id": "B-008",
+    "title": "Thermal Analysis v1",
+    "sprint": 2,
+    "wave": 2,
+    "owner": "Mech Agent（吳建宇）",
+    "status": "done"
+  },
+  {
+    "id": "B-009",
+    "title": "BOM v2",
+    "sprint": 2,
+    "wave": 3,
+    "owner": "PM Agent（詹雅婷）",
+    "status": "done"
+  },
+  {
+    "id": "B-010",
+    "title": "Risk Register v2",
+    "sprint": 2,
+    "wave": 3,
+    "owner": "PM Agent（詹雅婷）",
+    "status": "done"
+  },
+  {
+    "id": "B-011",
+    "title": "P2P Review Report",
+    "sprint": 2,
+    "wave": 3,
+    "owner": "QA Agent（林宜靜）",
+    "status": "done"
+  }
+]

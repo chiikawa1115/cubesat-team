@@ -1,0 +1,106 @@
+[
+  {
+    "id": "WAVE2-B001-DELIVERY",
+    "topic": "Wave 2 Comm Agent B-001 交付通知",
+    "status": "open",
+    "created_by": "Comm Agent",
+    "messages": [
+      {
+        "from": "Comm Agent（林志遠）",
+        "timestamp": "2026-05-03",
+        "message": "B-001 Link Budget v2.0 已完成，路徑：workspace/sprints/sprint2/wave2/B-001_link-budget-v2.md。AOCS Agent 請確認天線 HPBW 70° 對應的 1dB pointing loss ≤ ±20.2°，並在 B-006 引用本文件 Section 4（Pointing Loss Budget）。"
+      }
+    ]
+  },
+  {
+    "id": "WAVE2-B006-DELIVERY",
+    "topic": "Wave 2 AOCS Agent B-006 交付通知",
+    "status": "open",
+    "created_by": "AOCS Agent",
+    "messages": [
+      {
+        "from": "AOCS Agent（黃俊誠）",
+        "timestamp": "2026-05-03",
+        "message": "B-006 ADCS Trade Study 已完成，路徑：workspace/sprints/sprint2/wave2/B-006_aocs-trade-study-v1.md。選定方案 A（MTQ×3 + CubeWheel Nano），總功耗 0.42W（在 0.5W 預算內），指向精度 ±2°（≤±5° 需求）。Wave 3 Mech Agent 請注意 ADCS 質量 232g。Comm Agent：指向損耗確認遠小於 1dB 預算，無需調整 Link Budget。"
+      }
+    ]
+  },
+  {
+    "id": "WAVE2-B007-DELIVERY",
+    "topic": "Wave 2 SW/FW Agent B-007 交付通知",
+    "status": "open",
+    "created_by": "SW/FW Agent",
+    "messages": [
+      {
+        "from": "SW/FW Agent（徐志豪）",
+        "timestamp": "2026-05-03",
+        "message": "B-007 OBC/FPGA 架構完成。Zynq-7020（Xiphos Q7s），TMR+Scrubbing SEU 防護，LUT 37,000/53,200（69.5%）。功耗：standby 1.5W / active 4.0W，符合 Power Budget v2。可選 clock gating 降至 standby 1.2W 回應 B-005 Mitigation M2。Wave 3 Mech Agent：OBC active 散熱 4.0W 集中在 Zynq die（~10x10 mm），需規劃導熱路徑至結構面板。"
+      }
+    ]
+  },
+  {
+    "id": "WAVE3-B009-B010-DELIVERY",
+    "topic": "Wave 3 PM Agent B-009 + B-010 交付通知",
+    "status": "open",
+    "created_by": "PM Agent",
+    "messages": [
+      {
+        "from": "PM Agent（詹雅婷）",
+        "timestamp": "2026-05-07",
+        "message": "B-009 BOM v2 完成：硬體合計 ~$60,000（中位數 $61,853），完整任務預算 ~$455,000（含發射費 $300k）。教育折扣後硬體可降至 $51k-$55k。課程報告建議用語已附。DCN-001 太陽能板升級 6.5W 已反映。B-010 Risk Register 更新：共 7 項風險，最高 RPN=32（RISK-001 頻率協調），EOL 能量風險已降為 RPN=12（DCN-001 後），Sprint 2 新增 5 項風險均為 Medium/Low。SE + QA Agent：PDR 審查包（B-003）可以開始打包，所有 Wave 1-3 文件均已完成。"
+      }
+    ]
+  },
+  {
+    "id": "WAVE3-B011-P2P-REVIEW",
+    "topic": "P2P Review 完成通知",
+    "status": "open",
+    "created_by": "QA Agent",
+    "messages": [
+      {
+        "from": "QA Agent（林宜靜）",
+        "timestamp": "2026-05-09",
+        "message": "B-011 P2P Review 完成。B-006 ADCS Trade Study: Approve。B-007 OBC/FPGA Architecture: Approve。B-001 Link Budget v2: Conditional Approve — Critical Issue C-001：斜距 d=2,126 km 與精確計算 ~1,695 km 矛盾（差異 25%），Sprint 1 基線可能有誤，需釐清後修正。另有 7 項 Major Issues 列為 PDR Action Item（詳見 B-011 報告）。PDR 審查包（B-003）可以繼續製作，前提是 Comm Agent 在打包前修正 C-001 斜距問題。文件間一致性驗證通過（天線 HPBW、功耗、介面均吻合）。"
+      }
+    ]
+  },
+  {
+    "id": "WAVE3-B004-B008-DELIVERY",
+    "topic": "Wave 3 Mech Agent B-004 + B-008 交付通知",
+    "status": "open",
+    "created_by": "Mech Agent",
+    "messages": [
+      {
+        "from": "Mech Agent（吳建宇）",
+        "timestamp": "2026-05-07",
+        "message": "B-004 Mass Budget v2 完成：全星總質量（含 contingency）2,180g，質量餘裕 45.5%（遠低於 4,000g 限值）。B-008 熱控初步分析完成：Sunlit Nominal +17.2°C，Eclipse-end（含 0.5W 加熱器）-8.3°C，Contact Window Peak +24.7°C。電子元件全工況 PASS，電池需加熱器方可 PASS（Eclipse-end 餘裕 1.7°C）。PM Agent：BOM v2 請納入 CubeWheel Nano $3,500、EnduroSat Patch $4,000、Xiphos Q7s $25,000 等 Wave 2 新確定元件。EPS Agent：加熱器 0.5W Eclipse only，耗能 0.30 Wh/orbit。QA Agent：電池溫度餘裕 1.7°C 偏小，建議 PDR 列為 review item。"
+      }
+    ]
+  },
+  {
+    "id": "C001-FIX-COMPLETE",
+    "topic": "B-001 C-001 修正完成",
+    "status": "resolved",
+    "created_by": "Comm Agent",
+    "messages": [
+      {
+        "from": "Comm Agent（林志遠）",
+        "timestamp": "2026-05-09",
+        "message": "C-001 已修正完成。10° 仰角斜距更正為 1,695 km，FSPL 163.0 dB，Link Margin +8.8 dB（vs 原 +6.8 dB）。修正方向為更樂觀（路徑損耗較低），設計基線無需變更。B-001 v2.1 已更新，QA Agent 可重新確認，PDR 審查包可繼續。"
+      }
+    ]
+  },
+  {
+    "id": "B003-PDR-COMPLETE",
+    "topic": "PDR 審查包完成 — Sprint 2 PASS",
+    "status": "resolved",
+    "created_by": "SE Agent + QA Agent",
+    "messages": [
+      {
+        "from": "SE Agent（陳建宏）",
+        "timestamp": "2026-05-10",
+        "message": "B-003 PDR 審查包 v1 完成，路徑：workspace/sprints/sprint2/B-003_pdr-package-v1.md。PDR Entry Criteria 10/10 通過。RTM v1 17 條需求，雙向可追溯。9 個 PDR Action Items 已分派，4 個 High Priority 需在 CDR 前完成。Sprint 2 Phase B PASS，建議進入 Sprint 3 Phase C。請 CEO（Rudy）審核核准。"
+      }
+    ]
+  }
+]
