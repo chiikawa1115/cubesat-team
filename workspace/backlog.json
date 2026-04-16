@@ -86,5 +86,105 @@
     "wave": 3,
     "owner": "QA Agent（林宜靜）",
     "status": "done"
+  },
+  {
+    "id": "C-001",
+    "title": "系統需求規格書凍結 v2（吸收 DCN-001/002、B-006 指向修正）",
+    "assignee": "SE Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 3,
+    "sprint": 3,
+    "wave": 1
+  },
+  {
+    "id": "C-002",
+    "title": "RF PCB 詳細設計（4層板 50Ω，含 PA 散熱佈局）",
+    "assignee": "Comm Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 5,
+    "sprint": 3,
+    "wave": 2
+  },
+  {
+    "id": "C-003",
+    "title": "FPGA RTL 詳細設計（QPSK demod/mod + TMR scrubber + SAA 動態切換）",
+    "assignee": "SW/FW Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 6,
+    "sprint": 3,
+    "wave": 2
+  },
+  {
+    "id": "C-004",
+    "title": "ADCS 控制律模擬（RW 每軌去飽和驗證，B-006 正式更新 ±3.1°）",
+    "assignee": "AOCS Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 5,
+    "sprint": 3,
+    "wave": 2
+  },
+  {
+    "id": "C-005",
+    "title": "熱詳細分析（PA 散熱片設計，contact window peak +24.7°C 驗算）",
+    "assignee": "Mech Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 4,
+    "sprint": 3,
+    "wave": 2
+  },
+  {
+    "id": "C-006",
+    "title": "SPENVIS 軌道輻射模擬（SAA SEU rate，動態 scrubbing 設計驗證）",
+    "assignee": "SW/FW Agent",
+    "priority": "Medium",
+    "status": "done",
+    "story_points": 4,
+    "sprint": 3,
+    "wave": 2
+  },
+  {
+    "id": "C-007",
+    "title": "BOM v3 定案（料號確認，JLCPCB PCB 報價，教育折扣更新）",
+    "assignee": "PM Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 3,
+    "sprint": 3,
+    "wave": 3
+  },
+  {
+    "id": "C-008",
+    "title": "ConOps v2（補 EOL 降級操作模式，IoT 延遲保證）",
+    "assignee": "SE Agent",
+    "priority": "Medium",
+    "status": "done",
+    "story_points": 3,
+    "sprint": 3,
+    "wave": 3
+  },
+  {
+    "id": "C-009",
+    "title": "CDR 審查包（含 RTM v2、V&V 計畫 v1）",
+    "assignee": "SE + QA Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 5,
+    "sprint": 3,
+    "wave": 3
+  },
+  {
+    "id": "C-010",
+    "title": "P2P Review（CDR 前核心文件審查）",
+    "assignee": "QA Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 2,
+    "sprint": 3,
+    "wave": 3
   }
 ]
