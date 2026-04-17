@@ -198,7 +198,10 @@
     "wave": 0,
     "deliverable": "sprints/sprint4/D-HG-001_bpf-redesign-v1.1.md",
     "review_status": "approved",
-    "reviewers": ["SE Agent（陳明哲）", "SW/FW Agent（陳俊宏）"],
+    "reviewers": [
+      "SE Agent（陳明哲）",
+      "SW/FW Agent（陳俊宏）"
+    ],
     "cdr_ai": "CDR-AI-003",
     "gate_status": "CLOSED",
     "note": "v1 REJECT→v1.1 換選 Qorvo QPQ1900 BAW，re-review PASS 2026-04-17"
@@ -214,7 +217,10 @@
     "wave": 0,
     "deliverable": "sprints/sprint4/D-HG-002_lo-pll-scheme-v1.md",
     "review_status": "pending_p2p",
-    "reviewers": ["SW/FW Agent（陳俊宏）", "SE Agent（陳明哲）"],
+    "reviewers": [
+      "SW/FW Agent（陳俊宏）",
+      "SE Agent（陳明哲）"
+    ],
     "cdr_ai": "CDR-AI-003"
   },
   {
@@ -328,5 +334,32 @@
     "sprint": 4,
     "wave": 3,
     "notes": "課程最終交付物，含簡報 25 頁 + 計畫書 50 頁"
+  },
+  {
+    "id": "D-GEM-001",
+    "title": "Monte Carlo Link Budget Simulation",
+    "sprint": 4,
+    "wave": 1,
+    "owner": "Comm Agent",
+    "status": "qa_testing",
+    "review_status": "approved"
+  },
+  {
+    "id": "D-GEM-002",
+    "title": "BOM Supply Chain & DigiKey Validation",
+    "sprint": 4,
+    "wave": 1,
+    "owner": "PM Agent",
+    "status": "qa_testing",
+    "review_status": "approved"
+  },
+  {
+    "id": "D-GEM-003",
+    "title": "Integrated Radiation & SEU Mitigation Plan",
+    "sprint": 4,
+    "wave": 2,
+    "owner": "AOCS Agent, SE Agent",
+    "status": "qa_testing",
+    "review_status": "approved"
   }
 ]
