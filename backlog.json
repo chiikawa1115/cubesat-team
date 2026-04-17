@@ -1,0 +1,332 @@
+[
+  {
+    "id": "B-001",
+    "title": "Link Budget v2",
+    "sprint": 2,
+    "wave": 2,
+    "owner": "Comm Agent（林志遠）",
+    "status": "done"
+  },
+  {
+    "id": "B-002",
+    "title": "System Architecture + ICD v1",
+    "sprint": 2,
+    "wave": 1,
+    "owner": "SE Agent（陳建宏）",
+    "status": "done"
+  },
+  {
+    "id": "B-003",
+    "title": "PDR Package v1",
+    "sprint": 2,
+    "wave": 3,
+    "owner": "SE Agent（陳建宏）+ QA Agent（林宜靜）",
+    "status": "done"
+  },
+  {
+    "id": "B-004",
+    "title": "Mass Budget v2",
+    "sprint": 2,
+    "wave": 2,
+    "owner": "Mech Agent（吳建宇）",
+    "status": "done"
+  },
+  {
+    "id": "B-005",
+    "title": "Power Budget v2",
+    "sprint": 2,
+    "wave": 1,
+    "owner": "SE Agent（陳建宏）",
+    "status": "done"
+  },
+  {
+    "id": "B-006",
+    "title": "ADCS Trade Study v1",
+    "sprint": 2,
+    "wave": 2,
+    "owner": "AOCS Agent（黃俊誠）",
+    "status": "done"
+  },
+  {
+    "id": "B-007",
+    "title": "OBC/FPGA Architecture v1",
+    "sprint": 2,
+    "wave": 2,
+    "owner": "SW/FW Agent（徐志豪）",
+    "status": "done"
+  },
+  {
+    "id": "B-008",
+    "title": "Thermal Analysis v1",
+    "sprint": 2,
+    "wave": 2,
+    "owner": "Mech Agent（吳建宇）",
+    "status": "done"
+  },
+  {
+    "id": "B-009",
+    "title": "BOM v2",
+    "sprint": 2,
+    "wave": 3,
+    "owner": "PM Agent（詹雅婷）",
+    "status": "done"
+  },
+  {
+    "id": "B-010",
+    "title": "Risk Register v2",
+    "sprint": 2,
+    "wave": 3,
+    "owner": "PM Agent（詹雅婷）",
+    "status": "done"
+  },
+  {
+    "id": "B-011",
+    "title": "P2P Review Report",
+    "sprint": 2,
+    "wave": 3,
+    "owner": "QA Agent（林宜靜）",
+    "status": "done"
+  },
+  {
+    "id": "C-001",
+    "title": "系統需求規格書凍結 v2（吸收 DCN-001/002、B-006 指向修正）",
+    "assignee": "SE Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 3,
+    "sprint": 3,
+    "wave": 1
+  },
+  {
+    "id": "C-002",
+    "title": "RF PCB 詳細設計（4層板 50Ω，含 PA 散熱佈局）",
+    "assignee": "Comm Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 5,
+    "sprint": 3,
+    "wave": 2
+  },
+  {
+    "id": "C-003",
+    "title": "FPGA RTL 詳細設計（QPSK demod/mod + TMR scrubber + SAA 動態切換）",
+    "assignee": "SW/FW Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 6,
+    "sprint": 3,
+    "wave": 2
+  },
+  {
+    "id": "C-004",
+    "title": "ADCS 控制律模擬（RW 每軌去飽和驗證，B-006 正式更新 ±3.1°）",
+    "assignee": "AOCS Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 5,
+    "sprint": 3,
+    "wave": 2
+  },
+  {
+    "id": "C-005",
+    "title": "熱詳細分析（PA 散熱片設計，contact window peak +24.7°C 驗算）",
+    "assignee": "Mech Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 4,
+    "sprint": 3,
+    "wave": 2
+  },
+  {
+    "id": "C-006",
+    "title": "SPENVIS 軌道輻射模擬（SAA SEU rate，動態 scrubbing 設計驗證）",
+    "assignee": "SW/FW Agent",
+    "priority": "Medium",
+    "status": "done",
+    "story_points": 4,
+    "sprint": 3,
+    "wave": 2
+  },
+  {
+    "id": "C-007",
+    "title": "BOM v3 定案（料號確認，JLCPCB PCB 報價，教育折扣更新）",
+    "assignee": "PM Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 3,
+    "sprint": 3,
+    "wave": 3
+  },
+  {
+    "id": "C-008",
+    "title": "ConOps v2（補 EOL 降級操作模式，IoT 延遲保證）",
+    "assignee": "SE Agent",
+    "priority": "Medium",
+    "status": "done",
+    "story_points": 3,
+    "sprint": 3,
+    "wave": 3
+  },
+  {
+    "id": "C-009",
+    "title": "CDR 審查包（含 RTM v2、V&V 計畫 v1）",
+    "assignee": "SE + QA Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 5,
+    "sprint": 3,
+    "wave": 3
+  },
+  {
+    "id": "C-010",
+    "title": "P2P Review（CDR 前核心文件審查）",
+    "assignee": "QA Agent",
+    "priority": "High",
+    "status": "done",
+    "story_points": 2,
+    "sprint": 3,
+    "wave": 3
+  },
+  {
+    "id": "D-HG-001",
+    "title": "BPF 選型重新評估（Hard Gate Q1）— UL/DL 窄帶 BPF ≥40 dB 帶外抑制",
+    "assignee": "Comm Agent（林志遠）",
+    "priority": "Critical",
+    "status": "done",
+    "story_points": 3,
+    "sprint": 4,
+    "wave": 0,
+    "deliverable": "sprints/sprint4/D-HG-001_bpf-redesign-v1.1.md",
+    "review_status": "approved",
+    "reviewers": ["SE Agent（陳明哲）", "SW/FW Agent（陳俊宏）"],
+    "cdr_ai": "CDR-AI-003",
+    "gate_status": "CLOSED",
+    "note": "v1 REJECT→v1.1 換選 Qorvo QPQ1900 BAW，re-review PASS 2026-04-17"
+  },
+  {
+    "id": "D-HG-002",
+    "title": "LO 190 MHz 方案確認（Hard Gate Q2）— ADF4351 PLL 方案 + 相位雜訊分析",
+    "assignee": "Comm Agent（林志遠）",
+    "priority": "Critical",
+    "status": "done",
+    "story_points": 3,
+    "sprint": 4,
+    "wave": 0,
+    "deliverable": "sprints/sprint4/D-HG-002_lo-pll-scheme-v1.md",
+    "review_status": "pending_p2p",
+    "reviewers": ["SW/FW Agent（陳俊宏）", "SE Agent（陳明哲）"],
+    "cdr_ai": "CDR-AI-003"
+  },
+  {
+    "id": "D-001",
+    "title": "SPENVIS 精確輻射模擬（AE-8/AP-8/CREME96，更新 TID/SEU 數值）",
+    "assignee": "SW/FW Agent（陳俊宏）",
+    "priority": "High",
+    "status": "todo",
+    "story_points": 4,
+    "sprint": 4,
+    "wave": 1,
+    "cdr_ai": "CDR-AI-004",
+    "soft_gate": "Q5",
+    "notes": "FM 採購前置條件"
+  },
+  {
+    "id": "D-002",
+    "title": "ADCS Python 數值模擬（EKF + MTQ 完整 5 軌模擬，更正 eclipse 3σ）",
+    "assignee": "AOCS Agent（黃俊誠）",
+    "priority": "High",
+    "status": "todo",
+    "story_points": 5,
+    "sprint": 4,
+    "wave": 1,
+    "cdr_ai": "CDR-AI-005",
+    "soft_gate": "Q3",
+    "notes": "更正 B-006 宣稱 ±3.1° vs C-004 計算 ±3.6° 不一致"
+  },
+  {
+    "id": "D-003",
+    "title": "Link Budget v3（整合 BPF/PLL 更新 IL、FR4 微帶損耗、FEC Eb/N0 基礎確認）",
+    "assignee": "Comm Agent（林志遠）",
+    "priority": "High",
+    "status": "todo",
+    "story_points": 3,
+    "sprint": 4,
+    "wave": 1,
+    "soft_gate": "Q6,Q7",
+    "notes": "D-HG-001/002 完成後執行"
+  },
+  {
+    "id": "D-004",
+    "title": "System Budget v3 凍結（Mass/Power/Link 整合，含 PLL 功耗 +120mW）",
+    "assignee": "SE Agent（陳明哲）",
+    "priority": "High",
+    "status": "todo",
+    "story_points": 3,
+    "sprint": 4,
+    "wave": 1
+  },
+  {
+    "id": "D-005",
+    "title": "Heater 0.75W 評估 + 電池熱裕量確認（冬至最壞情況 ≥ 3°C 裕量）",
+    "assignee": "Mech Agent（吳建宇）",
+    "priority": "Medium",
+    "status": "todo",
+    "story_points": 2,
+    "sprint": 4,
+    "wave": 1,
+    "cdr_ai": "CDR-AI-006",
+    "soft_gate": "Q4"
+  },
+  {
+    "id": "D-006",
+    "title": "Vendor RFQ（6家廠商詢價：PA, BPF, PLL, 結構, PCB, 測試設施）",
+    "assignee": "PM Agent（黃俊榮）",
+    "priority": "Medium",
+    "status": "todo",
+    "story_points": 3,
+    "sprint": 4,
+    "wave": 1,
+    "cdr_ai": "CDR-AI-007"
+  },
+  {
+    "id": "D-007",
+    "title": "整合測試計畫 v1（單元測試→子系統→系統整合序列，含 TVAC/振動準備）",
+    "assignee": "QA Agent（林宜靜）",
+    "priority": "High",
+    "status": "todo",
+    "story_points": 5,
+    "sprint": 4,
+    "wave": 2
+  },
+  {
+    "id": "D-008",
+    "title": "TRR Package（測試準備審查包，所有 Soft Gate Q3-Q7 必須關閉）",
+    "assignee": "SE + QA Agent",
+    "priority": "High",
+    "status": "todo",
+    "story_points": 4,
+    "sprint": 4,
+    "wave": 2
+  },
+  {
+    "id": "D-009",
+    "title": "風險管理更新 v3（含 BPF/PLL 設計變更風險評估）",
+    "assignee": "PM Agent（黃俊榮）",
+    "priority": "Medium",
+    "status": "todo",
+    "story_points": 2,
+    "sprint": 4,
+    "wave": 2
+  },
+  {
+    "id": "D-010",
+    "title": "CEO 最終報告（25頁，推送 Google Docs）",
+    "assignee": "CEO Agent + All",
+    "priority": "Critical",
+    "status": "todo",
+    "story_points": 8,
+    "sprint": 4,
+    "wave": 3,
+    "notes": "課程最終交付物，含簡報 25 頁 + 計畫書 50 頁"
+  }
+]

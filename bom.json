@@ -1,0 +1,65 @@
+{
+  "components": [
+    {
+      "id": 1,
+      "subsystem": "OBC",
+      "name": "Xilinx Zynq-7020",
+      "part_number": "XC7Z020-1CLG484C",
+      "qty": 1,
+      "unit_price": 150.0,
+      "total": 150.0,
+      "url": "",
+      "notes": "",
+      "status": "quoted"
+    },
+    {
+      "id": 2,
+      "subsystem": "Comm",
+      "name": "ISIS UHF Transceiver",
+      "part_number": "ISIS-UHF-TRX",
+      "qty": 1,
+      "unit_price": 5000.0,
+      "total": 5000.0,
+      "url": "",
+      "notes": "",
+      "status": "quoted"
+    },
+    {
+      "id": 3,
+      "subsystem": "ADCS",
+      "name": "CubeSpace CubeADCS",
+      "part_number": "CS-ADCS-3AXIS",
+      "qty": 1,
+      "unit_price": 15000.0,
+      "total": 15000.0,
+      "url": "",
+      "notes": "",
+      "status": "quoted"
+    },
+    {
+      "id": 4,
+      "subsystem": "Structure",
+      "name": "ISIS 3U Structure",
+      "part_number": "ISIS-3U-STR",
+      "qty": 1,
+      "unit_price": 3000.0,
+      "total": 3000.0,
+      "url": "",
+      "notes": "",
+      "status": "quoted"
+    },
+    {
+      "id": 5,
+      "subsystem": "EPS",
+      "name": "Clyde Space 3G EPS",
+      "part_number": "CS-3G-EPS",
+      "qty": 1,
+      "unit_price": 8000.0,
+      "total": 8000.0,
+      "url": "",
+      "notes": "",
+      "status": "quoted"
+    }
+  ],
+  "updated": "2026-04-13T19:29:28.416799"
+}

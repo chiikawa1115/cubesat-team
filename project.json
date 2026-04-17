@@ -1,0 +1,29 @@
+{
+  "name": "TASA-NTN-3U",
+  "description": "3U CubeSat S-band NTN 透明轉發示範酬載",
+  "orbit_altitude_km": 500,
+  "orbit_type": "SSO",
+  "form_factor": "3U",
+  "payload_type": "S-band NTN Transparent (3GPP Rel-17)",
+  "frequency_band": "S-band n236 (~2 GHz)",
+  "mission_mode": "Transparent forwarding (bent-pipe)",
+  "created": "2026-04-15",
+  "status": "Phase A",
+  "sprints": [
+    {"number": 1, "phase": "A", "goal": "Mission Concept & System Requirements", "status": "done"},
+    {"number": 2, "phase": "B", "goal": "Preliminary Design & PDR", "status": "in-progress"},
+    {"number": 3, "phase": "C", "goal": "Detailed Design & CDR", "status": "pending"},
+    {"number": 4, "phase": "D", "goal": "Integration & Final Report", "status": "pending"}
+  ],
+  "design_changes": [
+    {
+      "id": "DCN-001",
+      "title": "太陽能板升級 5W → 6.5W",
+      "reason": "Power Budget v1.1 發現每圈能量收支為負（BOL -1.11 Wh/orbit），需提升發電量以支持 S-band 酬載 10.5W 接觸窗口功耗",
+      "impact": "EPS/Structure，BOM +$2,000，mass +0.15 kg",
+      "approved_by": "CEO (Rudy)",
+      "date": "2026-04-15",
+      "status": "approved"
+    }
+  ]
+}
