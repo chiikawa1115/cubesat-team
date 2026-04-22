@@ -1,8 +1,12 @@
 # 低軌衛星通訊設計概論 知識庫
 
-> 蒸餾自 TASA 課程教材（詹鎮宇研究員）- 2026/04/01 講次
+> 蒸餾自 TASA 課程教材（詹鎮宇研究員）
+> 整合版本：2026/04/01（基礎理論）+ **2026/04/18（最新重大改版，新增失敗案例、AESA、Prometheus SoC）**
+> 最後更新：2026-04-22
 
 ## 目錄
+
+**基礎理論（0401 版）**
 1. [課程總覽與 LEO 基本前提](#1-課程總覽與-leo-基本前提)
 2. [GEO vs. LEO 架構典範轉移](#2-geo-vs-leo-架構典範轉移)
 3. [DVB-S2X 與 5G NTN 波形比較](#3-dvb-s2x-與-5g-ntn-波形比較)
@@ -15,6 +19,13 @@
 10. [頻段取捨：Ku vs. Ka](#10-頻段取捨ku-vs-ka)
 11. [環境挑戰應對](#11-環境挑戰應對)
 12. [UAV 通訊延伸](#12-uav-通訊延伸)
+
+**0418 新增章節**
+13. [2026/04 LEO 現況與軌道永續性](#13-202604-leo-現況與軌道永續性)
+14. [失敗案例庫 + Gruhl Study](#14-失敗案例庫--gruhl-study)
+15. [Link Budget 極端情境對比與 Tranzeo 範例](#15-link-budget-極端情境對比與-tranzeo-範例)
+16. [AESA 相控陣天線深度](#16-aesa-相控陣天線深度)
+17. [Prometheus SoC 與 80/20 SDR 分流](#17-prometheus-soc-與-8020-sdr-分流)
 
 ---
 
@@ -96,8 +107,9 @@ FSPL (dB) = 20*log10(d) + 20*log10(f) + 32.44
 
 ### LEO 通訊特殊考量
 - 極端路徑損耗波動 > 20 dB（仰角變化）
-- 都卜勒頻移：Ka 頻段可高達 ±480 kHz
+- **都卜勒頻移：28 GHz (Ka) 可達 ±700 kHz**（0418 更新，舊版數值為 ±480 kHz，已失效）
 - 需即時 CQI 反饋與 AMC (自適應調變與編碼) 機制
+- 50 mm/h 亞熱帶雨 + 25° 低仰角 → 雨衰可達 **-22.0 dB**（0418 新增具體數值）
 
 ---
 
@@ -235,7 +247,8 @@ FSPL (dB) = 20*log10(d) + 20*log10(f) + 32.44
 - 透過 CQI 反饋 + AMC 自適應切換：高仰角用 64APSK（高吞吐），低仰角用 QPSK（強健）
 
 ### 征服都卜勒頻移
-- LEO 速度 7.5 km/s，Ka 頻段都卜勒偏移可達 ±480 kHz
+- LEO 速度 7.5 km/s
+- **Ka 頻段 (28 GHz) 都卜勒偏移可達 ±700 kHz**（0418 更新值，此為最新與最嚴苛的規格基準）
 - **DVB-S2x 策略：** PL-Pilots 固定間隔相位恢復
 - **5G-NTN 策略：** PTRS 動態可調相位跟蹤參考訊號
 
@@ -263,3 +276,339 @@ FSPL (dB) = 20*log10(d) + 20*log10(f) + 32.44
 - **中游：** 円通科技/YTTEK (SDRone), 創未來科技 (AESA 雷達/干擾器)
 - **下游：** 雷虎科技 (Thunder Tiger), 中光電智能機器人 (CIRC)
 - **國際：** AMD-Xilinx (FPGA), ADI (RF Transceiver), Silvus (MN-MIMO), Doodle Labs (Mesh Rider)
+
+---
+
+## 13. 2026/04 LEO 現況與軌道永續性
+
+> 來源：0418 版 p.2（封面後首頁）
+
+### LEO 群星統計（2026 年 4 月）
+
+| 類別 | 數量 | 備註 |
+|------|------|------|
+| 總追蹤物體 | ~33,074 | 含活躍 + 失聯衛星 + 火箭殘骸 + 大型碎片 |
+| 活躍衛星 | ~15,295 | 較 2023 年成長約兩倍 |
+| Starlink | **10,166** | 佔全球活躍 LEO 約 66% |
+| OneWeb | ~650 | |
+| Amazon Kuiper | ~180 | |
+
+### LEO 容納能力三維動態平衡
+
+1. **物理碰撞風險（Kessler 閾值）**
+   - 當軌道上大型物體（>10 cm）數量超過 **50,000** 時，凱斯勒連鎖碰撞風險達臨界點
+   - 來源：2026《Frontiers in Space Technologies》
+
+2. **電磁波頻譜限制（ITU）**
+   - 真正的限制往往不是空間，而是訊號干擾
+   - LEO 頻譜分配已趨近飽和
+
+3. **軌道槽位分配（Orbital Shells）**
+   - 各國向 ITU 遞交申請總數 **>100,000 顆**
+   - 「計畫容納量」與「安全承載量」之間存在顯著落差
+
+### 物理環境宏觀參數
+
+| 參數 | 數值 | 說明 |
+|------|------|------|
+| 衛星相對速度 | 7.5 km/s | 相對地表 |
+| 大氣路徑（天頂 90°） | 680 km | 短路徑 |
+| 大氣路徑（25° 低仰角） | 1,350 km | 增加表減區 |
+| 28 GHz Doppler | **±700 kHz** | 威脅 OFDM 正交性 |
+| Ka 50 mm/h 低仰角雨衰 | **-22.0 dB** | 亞熱帶 0.1% 降雨時間 |
+| 單波束吞吐目標 | 20 使用者 × 200 Mbps | 18/28 GHz 1 GHz 頻寬 |
+
+---
+
+## 14. 失敗案例庫 + Gruhl Study
+
+> 來源：0418 版 p.13-30（課程核心新增章節）
+
+### NASA Gruhl Study：成本隨發現時機指數爆炸
+
+| 成本倍數 | 發現階段 | 狀態 |
+|---------|---------|------|
+| **1x** | Phase A 設計 | Go-Flight Green（基線成本） |
+| **5-10x** | Phase B/C 設計與製造 | Early Amber（影響相依設計） |
+| **21-78x** | Phase D 整合與測試（I&T） | Alert Amber（跨子系介面翻修） |
+| **29-1,500x** | Phase E 在軌運作 | **Critical Red（高代價且可能無法修正）** |
+
+**NASA 鐵律**：前期 SE 投資每減少 1%，計畫總成本增加 10-20%。
+
+**The Agile Fallacy**：「快速失敗」在純軟體可行，但太空硬體系統後期發現的架構錯誤 → 指數級財務與時間災難。
+
+### 10 大歷史失敗案例
+
+| 案例 | 年代 | 斷裂環節 | 根本原因 | 損失 |
+|------|------|---------|---------|------|
+| IRIDIUM | 1990s | 需求工程 | 12 年超長設計致 2.4 kbps 過時、市場脫節 | 上線 9 月破產 |
+| GLOBALSTAR | 2000s | 架構設計 | SAA/TID 環境預估不足、SSPA 過早退化 | 頻率容量耗盡 |
+| STARLINK | 2020s | 架構設計 | 脫軌性質 + 電力可靠性；2022 40 顆群墜 | 2025 全球 150 分鐘斷訊 |
+| 千帆星座 (QIANFAN) | 2024 | 需求工程 | 初期缺乏 ISL、高度依賴地面、首輪彈射出現 Tumbling 翻轉 | 軌道失效 |
+| Mars Climate Orbiter | 1999 | 介面管理 | 公制/英制單位混用、ICD 未強制數值驗證 | $1.25 億 |
+| Ariane 5 Flight 501 | 1996 | V&V 不足 | Ariane 4 Heritage SW 直接沿用、64→16 bit 整數溢位、缺 HITL | $5 億 |
+| Hubble Telescope | 1990 | V&V 單一源盲點 | 完全依賴單一 RNC 測量基準、忽視矛盾證據（確認偏誤） | $8,600 萬修復 |
+| NASA DART | - | 高風險低預算妥協 | 排程壓力致晚期變更未測試、系統整合防護被繞過 | 任務全失 |
+| Challenger | 1986 | 風險文化 | O 環 -28°F 喪失彈性；已知異常被視為「可接受」 | 7 命 |
+| Columbia | 2003 | 風險文化 | 泡棉撞擊早有警訊，降級為「非飛安問題」（偏差常態化） | 7 命 |
+
+**INCOSE/NASA AIAA 2024 結論**：分析 50 個歷史太空系統失效案例 → **60% 源自設計錯誤與系統性缺陷**，而非單一硬體製造不良。
+
+### 5 大系統工程斷裂環節（防衛策略）
+
+| # | SE 環節 | 典型案例 | 防衛策略 |
+|---|---------|---------|----------|
+| 1 | 需求工程 | Iridium | 可驗證需求（Functional Baseline）+ 市場驗證循環 |
+| 2 | 架構設計 | Ariane 5 / GlobalStar | 完整 V&V + HITL 測試 + 運作包絡重評估 |
+| 3 | V&V 驗證確認 | Hubble / MPL | 獨立驗證工具（獨立驗證你的驗證者）+ 多測量基準 + 邊界條件測試 |
+| 4 | 介面管理 | MCO | 可執行 ICD（Executable Verification）+ 自動化單位轉換 |
+| 5 | 風險與文化 | Challenger / Columbia | 獨立技術權威；決策權與排程壓力脫鉤；無情盤查微小異常 |
+
+### NASA 生命週期 KDP（Key Decision Points）
+
+| 階段 | 名稱 | 關鍵關卡 |
+|------|------|---------|
+| Pre-Phase A / A | Concept & Technology | MCR, SRR |
+| Phase B | Preliminary Design | MDR/SDR |
+| **Phase C** | **Final Design & Fabrication** | **PDR, CDR（⚠️ Ariane 5 End-to-End V&V gate）** |
+| Phase D | Assembly Integration Test | SIR, ORR, ERR/MRR |
+| **Phase E** | **Operations** | ⚠️ Challenger 低溫發射約束應在此關 |
+| Phase F | Closeout | - |
+
+**設計熱度門檻**：
+- Functional Baseline (MDR/SDR)：架構可滿足頂層需求
+- Allocated Baseline (PDR)：**設計熱度達 10-20% 且風險可控**
+- Product Baseline (CDR)：**設計熱度必須 >90% 方可開始硬體製造**
+
+### 規格一致性現代工具鏈（MBSE）
+
+| 層次 | 工具 | 用途 |
+|------|------|------|
+| 架構級 | Cameo / System Composer / Gaphor | MBSE 跨組件跨文件一致性 |
+| 文字規格級 | QVscribe / IBM RQA | AI/NLP 自動檢查模糊語義（符合 INCOSE 撰寫準則） |
+| 通訊協議級 | TLA+ | 狀態機與訊息協議的形式化數學證明 |
+
+---
+
+## 15. Link Budget 極端情境對比與 Tranzeo 範例
+
+> 來源：0418 版 p.8-12, p.31-36
+
+### LEO Link Budget 極端情境（核心對比表，必背）
+
+| 參數 | 最佳（18 GHz DL, 90°, 晴空） | 極限（28 GHz UL, 25°, 暴雨） |
+|------|------------------------------|-------------------------------|
+| EIRP | +50.5 dBW | +50.0 dBW |
+| FSPL | -174.2 dB | -184.0 dB |
+| 大氣/雨衰 | -0.3 dB | **-22.0 dB** |
+| G/T | +15.8 dB/K | +11.5 dB/K |
+| **Final C/N** | **29.9 dB** | **-26.9 dB** |
+| 支援模式 | DVB-S2X 256APSK, 5.2 Gbps | 必須 Spread Spectrum 或縮至 10 MHz 窄頻 |
+
+**關鍵結論**：系統必須在 **>50 dB 動態範圍**內維持穩定基頻處理；RF 端物理餘裕不足 → 由基頻 DSP 精度、面積、功耗償還。
+
+### FSPL 公式（多單位版本）
+
+- 公制 (d=m, f=Hz)：`FSPL[dB] = 20·log₁₀(d) + 20·log₁₀(f) - 147.55`
+- 常用 (d=km, f=MHz)：`FSPL[dB] = 20·log₁₀(d) + 20·log₁₀(f) + 32.45`
+- 英制 (d=mile, f=MHz)：`FSPL[dB] = 20·log₁₀(d) + 20·log₁₀(f) + 36.58`
+
+### FSPL 速查表
+
+| 距離 | 900 MHz | 2.4 GHz | 5.8 GHz |
+|------|---------|---------|---------|
+| 1 km | 91.53 | 100.05 | 107.72 |
+| 5 km | 105.51 | 114.03 | 121.70 |
+| 10 km | 111.53 | 120.05 | 127.72 |
+| 50 km | 125.51 | 134.03 | 141.70 |
+
+### Tranzeo P2P 設計範例（5 km @ 5.8 GHz, 2×TR-Splus-24）
+
+| 參數 | 數值 |
+|------|------|
+| Tx Power | +23 dBm |
+| Tx Antenna Gain | +24 dBi |
+| **Tx EIRP** | **+47 dBm** |
+| FSPL | 121.70 dB |
+| Polarization Loss | 3 dB |
+| Rx Antenna Gain | +24 dBi |
+| Received Isotropic Power | -160.55 dBm |
+| Channel Noise | -75.70 dBm |
+| **CNR** | **~25 dB** |
+| Required SNR (54 Mbps) | -75 dB |
+| **Link Margin** | **21.30 dB** |
+
+### Modulation vs. SNR 速查
+
+| 調變 | 資料速率 | 最小 SNR |
+|------|---------|----------|
+| BPSK 1/2 | 6 Mbps | 8 dB |
+| QPSK 1/2 | 12 Mbps | 11 dB |
+| QPSK 3/4 | 18 Mbps | 13 dB |
+| 16-QAM 1/2 | 24 Mbps | 16 dB |
+| 16-QAM 3/4 | 36 Mbps | 20 dB |
+| 64-QAM 2/3 | 48 Mbps | 24 dB |
+| 64-QAM 3/4 | 54 Mbps | 25 dB |
+
+### SQNR 與 ENOB 定量推導
+
+- **公式**：SNR = 6.02·N + 1.76 dB（N = ENOB）
+- 目標 SNR 40 dB → ENOB ≥ 8.5 bits
+- Dynamic Headroom：64APSK PAPR 7-9 dB + AGC 餘裕 + Pilot/非線性 -12 dB
+- **結論**：LEO 基頻必須選 **12-bit (Q1.10) 1.25 Gsps ADC/DAC**
+
+### 效能參數總整
+
+| 指標 | 目標值 | 意義 |
+|------|--------|------|
+| EVM | **< 3% (-30.5 dB)** | 64/256APSK 對抗相位噪聲 |
+| PER/CRC | **< 10⁻⁵** | QoS 保證 |
+| LDPC Coding Gain | **8-10 dB** | SNR 0.9 dB 邊緣救命線 |
+
+---
+
+## 16. AESA 相控陣天線深度
+
+> 來源：0418 版 p.44-60（17 頁完整新章節）
+
+### 為何 LEO 需要 AESA
+- LEO 速度 7.8 km/s，仰角窗口僅 5-10 分鐘
+- 傳統機械天線（Gimbal）無法追蹤
+- AESA 透過相位偏移 Δφ 達成**毫秒（ms）級無機械波束轉向**
+
+### Beamforming 架構對比
+
+| 特性 | Analog BF | **Hybrid BF** | Digital BF |
+|------|-----------|---------------|------------|
+| ADC/DAC | 共享單一 | 子陣列級結合 | 每單元獨立 |
+| 耗電 | 極低 | 中等 | 極高（1024 單元需 8 Tbps 數據處理） |
+| 多波束 | 單 | 有限多波束 | 無限獨立 |
+| 成本 | 低 | 最佳平衡 | 極高 |
+| 應用 | 固定回傳 | **LEO 商用終端主流** | 高階星上鏈級 |
+
+### 掃描損耗曲線
+
+- 法線 (Boresight 0°)：**35.8 dBi**
+- 60° 最大掃描：**31.5 dBi**（降 4.3 dB）
+- 規律：有效孔徑 ∝ cos θ
+
+### Starlink 終端演進
+
+| 代次 | 架構 | 特徵 |
+|------|------|------|
+| Gen 1 (V1) | 純數位 | 79 DBF + 8 FEM，極高成本 |
+| Gen 2/3 (V2/V3) | 轉向混合 | 縮小化 Hybrid BF |
+| Gen 4 (V4) | 高度整合 | 6 顆 DBF 晶片驅動 **1536 個天線單元**，量產降本 |
+
+### BFIC 四大廠商對標
+
+| 廠商 | 代表產品 | 核心優勢 | 最佳場景 |
+|------|---------|---------|----------|
+| **Anokiwave (Qorvo)** | AWMF-0221 Gen-4 | CMOS 高集成 | 大規模平價終端 |
+| **Renesas** | F6122 / F6522 | SiGe 雙波束、**<100 ns 切換** | 高機動/雙星追蹤 |
+| **Analog Devices** | ADAR3000 | **TTD 整合、4 波束、CSH/CSL 太空認證** | 寬頻多波束中星 |
+| **SatixFy / Launchip** | Prime 2.0 / TBF0828A | 全數位 DBF ASIC / 低成本抗輻射 CMOS | 新一代數位酬載 / 本土供應鏈 |
+
+### AESA 三大挑戰
+
+1. **Beam Squint（寬帶掃描偏斜）**
+   - 原因：Phase Shifter 頻率相關折射
+   - 症狀：>100 MHz 寬帶下 0.5°-2.0° 偏斜
+   - 解方：**True Time Delay (TTD) 補償**（<8.1° 對準精度）
+
+2. **熱管理挑戰**
+   - PA 效率僅 15-25%，75-85% 變廢熱
+   - 大型終端如 Skylark 達 **645W**
+   - Ka-band 單元間距 λ/2 ≈ **5 mm**，熱極度集中
+   - **BFIC T_junction > 150°C [CRITICAL]**
+   - 解方：微流體冷卻通道 + 銅心 PCB + 異質 3D 整合（GaN Tx / SiGe Rx / CMOS DBF Chiplet）
+
+3. **Make-Before-Break（LEO 交接）**
+   - 切換需求 **<1 μs**
+   - Renesas 雙波束 <100 ns 完美對應
+
+### 測試方法對比
+
+| 方法 | 距離 | AESA 診斷 | 用途 |
+|------|------|-----------|------|
+| Near-Field (NF) | <10λ | 極高（單單元失效定位） | 研發診斷、孔徑分析 |
+| Far-Field (FF) | 公里級 | 低（僅整體波束） | 最終驗證 |
+| **CATR** | 室內暗室 | **最佳（兼顧校準與高精測）** | **衛星終端整機驗證** |
+
+---
+
+## 17. Prometheus SoC 與 80/20 SDR 分流
+
+> 來源：0418 版 p.91-109
+
+### Prometheus SoC 架構（AMD/Xilinx 衛星專用）
+
+- Cortex-A53 多核 CPU + 硬體加速器（HWA） + DSP 向量陣列
+- **Mesh NoC + ACE 快取一致性**（30 Gbps 內部吞吐）
+- 100 GbE / SerDes 支援 OISL 光學星間鏈路
+- 整合 1.25 Gsps ADC/DAC 數位前端
+
+### 80/20 異構負載分流法則
+
+**80% 硬體加速路徑（HWA）**：
+- 2048-pt FFT / IFFT
+- LDPC 解碼（4 Gbps 並行）
+- 脈衝成形、匹配濾波器、相位旋轉
+- 能效目標：**<10 pJ/bit**
+
+**20% 軟體彈性路徑（DSP + CPU）**：
+- 信道估計與等化
+- AMC 自適應調變編碼選擇
+- 多協議轉接（DVB-S2X ⇄ 3GPP NR NTN）
+- 衛星間路由決策
+
+### 匯流排協調三機制
+
+1. **DMA (Direct Memory Access)**：DFE 樣本直接推入共享 SRAM，繞過 CPU
+2. **ACE Snooping**：硬體快取一致性，避免軟體鎖定開銷
+3. **CPU Bypass**：Zero-copy，運算延遲 ms → μs 級
+
+### NoC vs AXI Crossbar（為何傳統匯流排不行）
+
+- 傳統 AXI Crossbar 在 >數百 IP 核時佈線指數爆炸
+- NoC Mesh + GALS（Globally Asynchronous Locally Synchronous）允許局部休眠省電
+- Flits 微封包交換 + 虛擬通道多工
+
+### 衛星 SDR 平台三強
+
+| 平台 | 特色 | 應用 |
+|------|------|------|
+| **Xilinx Zynq UltraScale+ RFSoC** | 8 通道 14-bit ADC/DAC @5 Gsps | 前端數位化 + 可程式邏輯 |
+| **ADI ADRV9009-ZU11EG / AD9361** | DC-6 GHz Transceiver + JESD204C | RF 前端整合、多通道相控陣驅動 |
+| **AMD Prometheus** | NoC + HWA + ACE + 100 GbE | 衛星 Payload 數據機、多協議 |
+
+### US Patent 12,244,396 B1（SpaceX, 2025-03）
+
+**標題**：Configurable OFDM Multi-Layer Receiver for Satellite to Gateway Uplink and Downlink
+
+**IP 防護範圍**：
+- Claim 1：PILOT 子帶 + DATA 子塊線性插值、邊帶導頻路徑
+- Claim 17：部署感知參數切換（SAT/UT/SAG 角色 + DC Null + LO 涵蓋）
+
+**迴避策略**：
+1. 導頻框架替換：改用 Zadoff-Chu (ZC) 序列（LTE/5G 標準）
+2. 同步機制：本地計算（Local Calculation）取代專用 ASIC 解碼
+3. 環境濾波器：採用開源 OFDM 模組
+
+### NewSpace 可靠度公式
+
+**Careful COTS + Lot-by-lot NDT & Proton + TMR + LCL = NewSpace Reliability**
+
+- **Careful COTS**：精挑細選商用晶片（非太空級）
+- **Lot-by-lot NDT**：批次非破壞性測試 + 質子輻射
+- **TMR**：三模冗餘 + Majority Voter
+- **LCL (Latch-up Current Limiter)**：<1 ms 內切斷過流，防 SEL 熱損傷
+- **設計哲學**：「系統級容錯」取代「件級絕對保證」，成本效益才是巨型星座制勝之道
+
+### 衛星作為雲原生軌道節點
+
+Prometheus 不只是 Modem，而是**太空邊緣運算節點**：
+- 在軌流量快取、路由
+- AWS Ground Station 整合
+- 99.9999% 可用度（TMR + 異構加速）
+- 未來通訊競爭 = 矽片微觀架構競爭
