@@ -1,0 +1,32 @@
+{
+  "skill_name": "cubesat-team (0418 update)",
+  "eval_date": "2026-04-22",
+  "purpose": "Benchmark agent responses before/after 0418 PDF distillation update",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "ka-band-doppler-design",
+      "prompt": "我要設計 28 GHz Ka 頻段的 LEO 衛星通訊鏈路，請回答：(1) 最新的都卜勒頻移幅度、(2) OFDM 同步該怎麼補償、(3) 基頻 ADC/DAC 建議規格（位元數、取樣率）、(4) 暴雨低仰角時 Link Budget 會變成怎樣。每項都要附數字。",
+      "target_agent": "comm-payload",
+      "key_points_expected": [
+        "±700 kHz (new 0418 value, not ±480)",
+        "PTRS / PL-Pilots / TTD concepts",
+        "12-bit Q1.10 1.25 Gsps with ENOB derivation (6.02N+1.76)",
+        "28 GHz UL 25° rain → C/N -26.9 dB, -22 dB rain attenuation"
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "heritage-sw-risk-review",
+      "prompt": "Sprint 2 團隊提議直接重用上一代衛星的 SDR 韌體以節省時間。請以系統工程師身份評估風險，給出 Phase B/C 行動建議，並引用歷史案例支持立論。",
+      "target_agent": "systems-engineer",
+      "key_points_expected": [
+        "Ariane 5 Heritage Code + 64->16 bit overflow",
+        "Gruhl Study cost curve (1x-1500x)",
+        "HITL (Hardware-in-the-Loop) required",
+        "KDP-C End-to-End V&V gate",
+        "Re-evaluate operating envelope"
+      ]
+    }
+  ]
+}
