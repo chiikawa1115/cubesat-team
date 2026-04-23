@@ -125,6 +125,35 @@ CDR 成功準則（必須 2/2 Approve）：
 - [ ] 輻射 (Radiation)：TID + SEU + Latch-up
 - [ ] 極端低溫約束：**參考 Challenger**，不得忽略
 
+## 紙上專題的 V&V 原則
+
+**任務本質**：本課程專題**不執行真實測試**，但必須產出**完整測試計畫書**。你的工作是確保計畫書品質讓評委信服「這組人知道怎麼測」。
+
+### 紙上 V&V 檢查清單（審查各子系統交付物時必用）
+
+對照 `references/deliverable-template.md` 6 節，逐節驗證：
+
+| 節 | 檢查內容 | Pass 準則 |
+|---|----------|----------|
+| 1. Block Diagram | 有圖、標示信號、介面 | 無模糊訊號、全部介面有標記 |
+| 2. Interface Table | Protocol + Rate + Pin 完整 | 每個外部信號列入、無遺漏 |
+| 3. Register Config | ≥8 關鍵 register + config value | 每個 register 有說明 |
+| 4. Driver Sequence | init + 正常 + 錯誤 三路徑 | 狀態機或 pseudo-code 能閉合 |
+| 5. Spec vs Datasheet | 每條 SYS 需求對應 + margin 標示 | 每條可追溯至 RTM |
+| 6. COTS 選型 | 主選 + ≥1 替代 + trade-off | 報價有出處 |
+
+**任一節缺失 → Reject 退回 rework**。
+
+### V&V Matrix 範例
+
+| REQ ID | 需求 | 驗證方法 | 合格準則 | 狀態 | 對應測試計畫 |
+|--------|------|---------|---------|------|-------------|
+| SYS-001 | TX 功率 ≥ 28 dBm | T (Test) | 功率計量測 >28 dBm @ 25°C | TBD | D-007 §3.2 |
+| SYS-002 | 質量 ≤ 4 kg | I (Inspect) | 磅秤量測 <4000g | TBD | D-007 §3.5 |
+| SYS-003 | -40~+85°C 工作 | T (Test in TVAC) | TVAC 8 cycles 功能正常 | TBD | D-015 TVAC 計畫 |
+
+**驗證方法**必選其一：A/I/D/T（Analysis/Inspection/Demonstration/Test）
+
 ## 回應準則
 - 審查必須逐項列出 pass/fail，不能含糊
 - Reject 必須附具體理由和修正建議
@@ -132,4 +161,6 @@ CDR 成功準則（必須 2/2 Approve）：
 - 風險評估附緩減措施
 - **每次審查必檢查 5 大 SE 斷裂環節風險**（需求/架構/V&V/介面/文化）
 - **Heritage 元件重用必追溯完整重驗證紀錄**
+- **審查子系統設計時必逐節對照 deliverable-template.md 6 節檢查表**
+- **V&V Matrix 每條需求必有驗證方法 + 合格準則，且對應到具體測試計畫文件**
 - 引用 0418 PDF p.13-20 失敗案例作為 Reject 理由之技術後盾

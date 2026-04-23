@@ -151,6 +151,23 @@ C/N₀ = EIRP - FSL - Losses + G/T - k
 - references/cots-components.md — 通訊元件
 - references/pdf-paths.md — 0418 PDF 主戰場 p.3, p.8-12, p.44-60, p.91-109
 
+## 紙上專題交付物規範
+
+**任務本質是課程報告，不真做 RF PCB 製造、不真買 FPGA、不真跑 VNA 量測**。你的交付物必須套用 `references/deliverable-template.md` 6 節格式：
+
+1. **Block Diagram**：RF 鏈路（天線 → LNA/PA → Mixer → ADC/DAC → FPGA → OBC）
+2. **Interface Table**：SPI (FPGA↔ADC/DAC)、JESD204C（高速）、GPIO/I2C（控制）
+3. **Register Config**：MODCOD_SEL、AGC_GAIN、Doppler 補償字、PLL 頻率字
+4. **Driver Sequence**：init 序列 + AMC 自適應切換邏輯 + Doppler 追蹤迴路 pseudo-code
+5. **Spec vs Datasheet**：TX 功率、RX 靈敏度、EVM、Doppler 容限、C/N 對照表（18 GHz DL / 28 GHz UL 極端情境）
+6. **COTS 選型**：ADI AD9361 vs ADRV9009-ZU11EG vs CesiumAstro SDR-1001，主選+替代+trade-off
+
+### AESA 章節必寫要點（如果選 AESA 架構）
+- 三架構對比（Analog/Hybrid/Digital）+ BFIC 廠商對標
+- Beam Squint + TTD 補償
+- 熱管理（T_j >150°C 臨界、微流體冷卻）
+- **紙上設計**：不真做 PCB layout，貼 Starlink 參考架構即可
+
 ## 回應準則
 - Link Budget 必須附完整計算表，對照極端情境（18/28 GHz、仰角、雨衰）
 - 元件選型附 datasheet 關鍵參數
@@ -159,3 +176,5 @@ C/N₀ = EIRP - FSL - Losses + G/T - k
 - 基頻架構必談 80/20 HWA/DSP 分流邏輯
 - 考慮 SWaP-C（Size, Weight, Power, Cost）限制
 - 技術聲明附來源頁碼（0418 PDF p.X）
+- **子系統設計交付物必須套用 deliverable-template.md 6 節格式**
+- Driver 用 pseudo-code，**不需真實 C 或 RTL**

@@ -108,10 +108,28 @@ FPGA Resource Allocation Example (Xilinx Zynq UltraScale+):
 - **4/10 PDF 頁 13** — 軟體定義無線電（SDR）核心技術支柱
 - **4/10 PDF 頁 2** — 衛星開發全攻略：FDIR 四級架構
 
+## 紙上專題交付物規範
+
+**任務本質是課程報告，不真燒錄 FPGA、不真跑 Vivado synthesis**。你的交付物必須套用 `references/deliverable-template.md` 6 節格式：
+
+1. **Block Diagram**：FSW 層級（App → Middleware → HAL → Drivers）、FPGA 架構（PS + PL 分工）
+2. **Interface Table**：OBC 周邊（UART/SPI/I2C/CAN）匯總、FPGA ↔ ADC/DAC JESD204C
+3. **Register Config**：關鍵 peripheral init register、FPGA 配置暫存器
+4. **Driver Sequence**：bootloader + FDIR 四層狀態機 + FSW 任務調度 (cooperative vs preemptive)
+5. **Spec vs Datasheet**：LUT/BRAM/DSP 使用量估算 vs FPGA 容量、功耗 vs 預算
+6. **COTS 選型**：OBC SoC（Xilinx Zynq US+ vs AMD Prometheus）、RTOS（FreeRTOS vs cFS）主選+替代+trade-off
+
+### Prometheus SoC + 80/20 分流（0418 知識）
+- 80% HWA 固化（FFT, LDPC, 脈衝成形）：**架構說明即可，不真 RTL**
+- 20% DSP/CPU 彈性：信道估計、AMC、多協議轉接
+- NoC + ACE 快取一致性：**概念圖 + 一句話說明用意**
+
 ## 回應準則
 - FPGA 資源估算附 LUT/BRAM/DSP 使用量，並驗證不超過 FPGA 容量 90%
 - SEU 策略根據任務壽命和軌道高度調整（LEO 通常需 TMR）
 - FSW 架構圖含 task scheduling、SNOS 協議層與 FDIR 邏輯
 - COTS 元件附溫度範圍和輻射耐受度
-- **新增**：SDR 動態模組加載的優先序（關鍵調變先加載）
-- **新增**：FDIR 四層恢復邏輯應在 CDR 階段完整定義
+- **子系統設計交付物必須套用 deliverable-template.md 6 節格式**
+- Driver 用 pseudo-code 或狀態機，**不需真實 C 程式碼或 Verilog RTL**
+- SDR 動態模組加載的優先序（關鍵調變先加載）
+- FDIR 四層恢復邏輯應在 CDR 階段完整定義

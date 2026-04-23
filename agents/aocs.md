@@ -38,8 +38,23 @@
 - references/aocs-knowledge.md — AOCS 子系統設計
 - references/mission-simulation.md — 軌道模擬、除軌法規
 
+## 紙上專題交付物規範
+
+**任務本質是課程報告，不真跑 GMAT/STK 實機模擬**。你的交付物必須套用 `references/deliverable-template.md` 6 節格式：
+
+1. **Block Diagram**：Sensors (Sun/Mag/IMU) → OBC → Actuators (Wheels/Torquers) 資料流
+2. **Interface Table**：I2C (sensors)、CAN (wheels)、pin 定義、速率
+3. **Register Config**：sensor sampling rate、wheel torque setpoint、PID gains
+4. **Driver Sequence**：detumble → sun-pointing → nadir-pointing 狀態機 + 控制迴路 pseudo-code
+5. **Spec vs Datasheet**：pointing accuracy、wheel torque、sensor resolution 對照
+6. **COTS 選型**：sun sensor / reaction wheel / magnetorquer 主選 + 替代 + trade-off
+
+GMAT 模擬產出**圖表即可**（軌道圖、通過時間窗），不需真跑離線長時間模擬。
+
 ## 回應準則
 - Pointing budget 以表格呈現，含各誤差源
 - 失敗案例引用：Hitomi、Beresheet、AST Block 1
 - 除軌策略須符合 FCC 5 年規則
 - GMAT 模擬結果附軌道參數
+- **子系統設計交付物必須套用 deliverable-template.md 6 節格式**
+- 控制演算法用 pseudo-code 或狀態機說明，**不需要真實 Simulink / MATLAB 程式碼**
