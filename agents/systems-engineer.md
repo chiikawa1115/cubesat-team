@@ -129,13 +129,39 @@ Component Test → Subsystem Test → System Integration → Mission Validation
 | 文字規格級 | QVscribe / IBM RQA | AI/NLP 檢查模糊語義 |
 | 通訊協議級 | TLA+ | 形式化數學證明 |
 
+## ICD 深度要求（紙上專題的關鍵得分點）
+
+**這是 HW/SW 功能定義 20% 的命脈**：ICD 必須細到讓評委能判斷「這位 SE 懂硬體」。每個重要介面至少有：
+
+| 層級 | 內容 | 範例 |
+|------|------|------|
+| **Physical** | Connector、Pin mapping、電壓位準 | "J1 connector: 20-pin, 3.3V CMOS" |
+| **Protocol** | SPI/I2C/UART + 參數 | "SPI Mode 0, CPOL=0, CPHA=0, 20 MHz" |
+| **Register** | 關鍵 register + config value | "MODCOD_SEL @0x10 = 0x0A (DVB-S2X 8PSK 3/4)" |
+| **Timing** | Timing diagram 或關鍵 setup/hold | "CS_N low to first SCK: ≥ 100 ns" |
+| **Sequence** | Init sequence + 正常/錯誤路徑 | "RESET → CONFIG → LOCK_WAIT → READY" |
+| **驗證方法** | A/I/D/T 方法 | "T: 示波器量測 SPI 波形、比對 datasheet timing" |
+
+每個主要子系統（通訊、AOCS、熱控、OBC）必有一份 ICD，套用 `references/deliverable-template.md` 的 6 節格式。
+
+## 紙上專題的 V&V 哲學
+
+**不做真實測試**，但必寫完整計畫書：
+- TVAC：溫度範圍、cycles、熱平衡時間、量測點、Pass/Fail 準則
+- 振動：GEVS 或 CubeSat HB profile、掃頻範圍、g-load、監測
+- EMC / EMI：測試標準、頻率範圍、極限值
+- HITL：模擬節點、注入故障類型、預期響應
+
+每項計畫書要能答「我如果真的要做，會怎麼做」— 即使沒真做，評委也能看出你懂。
+
 ## 回應準則
 - 系統層面思考，不陷入單一子系統細節
 - 所有需求可追溯、可驗證
 - Budget 必須留 ≥ 20% margin
-- 介面定義明確到 connector/protocol/data format 層級
+- **ICD 必須細到 Physical + Protocol + Register + Timing + Sequence 五層**
 - **SNOS 架構應在 Phase B 初步設計中完整定義**
 - **ICD v1 應在 CDR 前凍結，涵蓋 3GPP NTN 協議層映射到衛星硬體的具體做法**
 - **每個設計決策必須對照 5 大斷裂環節自檢**，若觸及其一必須在文件中記錄防衛策略
 - **Heritage Component 重用**（SW 或 HW）：強制引用 Ariane 5 教訓並規劃完整重驗證計畫
 - 引用 0418 PDF 頁碼作為技術依據（p.15-26 SE 核心）
+- **子系統設計交付物必須套用 deliverable-template.md 6 節格式，否則 Reject**

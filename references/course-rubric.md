@@ -67,9 +67,82 @@
 
 ---
 
+## 紙上專題得分要點（每項怎麼拿滿分）
+
+> 本節說明**在課程專題脈絡下**，每個評分項目如何拿高分。所有 agent 在提交交付物前應對照此表自檢。
+
+### 1. CubeSat 酬載/COTS (10%)
+
+| 得 9-10 分 | 得 7-8 分 | 得 5-6 分 |
+|-----------|-----------|-----------|
+| 主選 + ≥1 替代方案各附 datasheet 關鍵數值、DigiKey/Avnet 報價截圖、單價 TWD；trade-off 表清楚寫為何不選替代 | 只有主選元件有料號 + 概估價，沒列替代方案 | 只提規格需求沒挑出具體料號，或只寫「採用 Xilinx FPGA」沒型號 |
+
+**Q&A 防守**：教授必問「你為何選這顆不選那顆？」→ 必答 cost/performance/heritage 三角 trade-off。
+
+### 2. 硬體/軟體功能定義 (20%)
+
+| 得 18-20 分 | 得 14-17 分 | 得 10-13 分 |
+|------------|-------------|-------------|
+| 每子系統套用 deliverable-template.md 6 節（Block/Interface/Register/Driver/Spec/COTS），ICD 細到 SPI Mode、Register Config Value、Driver pseudo-code | 有 Block Diagram + Interface Table 但 Register/Driver 細節不足 | 只有文字敘述、無 diagram、無 interface table |
+
+**Q&A 防守**：教授可能問「OBC 怎麼驅動這個 SDR？初始化序列？」→ 必有 pseudo-code 或狀態機答得出。
+
+### 3. 驗測方法設計 (20%)
+
+| 得 18-20 分 | 得 14-17 分 | 得 10-13 分 |
+|------------|-------------|-------------|
+| V&V matrix 每條系統需求對應 A/I/D/T 方法、有合格準則（e.g., "TX 功率 > 28 dBm @ 25°C"）、TVAC/振動**測試計畫書**完整（不需真執行） | 有測試計畫但缺合格準則或 V&V matrix 不完整 | 只寫「做 TVAC 測試」沒參數、序列、準則 |
+
+**關鍵**：紙上專題**不需要真的跑 TVAC**，但**測試計畫書必須完整**（溫度範圍、循環次數、序列、儀器、Pass/Fail 準則）。
+
+### 4. 計畫成員（團隊分工） (20%)
+
+| 得 18-20 分 | 得 14-17 分 | 得 10-13 分 |
+|------------|-------------|-------------|
+| 組織圖 + RACI matrix + 每位成員負責章節 + Peer Review 簽核記錄（交叉審查明確） | 有分工清單但無 RACI 或審查流程 | 只列姓名沒明確職責劃分 |
+
+**本 skill 優勢**：8 agent 模擬 + P2P Review Gate 直接對應此項，容易拿高分。但要在簡報清楚秀出「Claude team multi-agent architecture」。
+
+### 5. 計畫時程與經費 (20%)
+
+| 得 18-20 分 | 得 14-17 分 | 得 10-13 分 |
+|------------|-------------|-------------|
+| WBS 分解到工作包層級 + Gantt 圖（含 Critical Path 標示）+ BOM 凍結含合計總額（TWD）+ 風險緩解預留 | 有 WBS 和 BOM 但 Gantt 是純文字、缺總金額 | 只有高層級時程、BOM 沒單價 |
+
+**必附**：
+- Mermaid / PlantUML Gantt 圖
+- 完整 BOM 表（料號、供應商、單價、數量、合計）
+- 總預算表（硬體 + 人事 + 測試 + 發射 + 預備金 10%）
+
+### 6. 口頭簡報 (10%)
+
+| 得 9-10 分 | 得 7-8 分 | 得 5-6 分 |
+|-----------|-----------|-----------|
+| 25 分鐘內精準完成 20 分鐘報告 + 5 分鐘 Q&A；每 agent 負責自己章節清楚表達；Q&A 能引具體數字/案例/頁碼 | 報告完整但超時、Q&A 答不出具體數字 | 講不完、Q&A 崩潰、引不出具體資料 |
+
+**練習建議**：
+- 報告前 3 天 run-through × 2 次
+- 用 `/challenge` 指令模擬詹老師 Q&A 壓測
+- 準備 Q&A 彈藥庫（AESA、Gruhl Study、±700 kHz Doppler、Ariane 5 Heritage、SYS-requirement 數值）
+
+---
+
+## 絕對不能犯的錯（會被大扣分）
+
+1. **BOM 沒單價或沒合計** → 時程經費 -5 分
+2. **講不出為何選這顆元件** → COTS 與 HW/SW 各 -3 分
+3. **Spec 比對沒有 margin 數值** → HW/SW -3 分
+4. **V&V 沒合格準則** → 驗測 -5 分
+5. **ICD 沒到 register / pin 層級** → HW/SW -5 分
+6. **Q&A 時答「我回去查一下」** → 口頭 -3 分
+7. **簡報超時 > 22 分鐘被打斷** → 口頭 -3 分
+
+---
+
 ## 參考資料
 
 - TASA B5G 低軌衛星通訊計畫
-- 詹鎮宇研究員授課教材（見 pdf-paths.md）
+- 詹鎮宇研究員授課教材（見 pdf-paths.md，0418 版為最新主戰場）
 - NASA Systems Engineering Handbook (NASA/SP-2016-6105 Rev2)
 - ECSS-E-ST-10C (Space engineering - System engineering general requirements)
+- **references/deliverable-template.md** — 統一 6 節交付物模板

@@ -34,8 +34,32 @@
 - references/system-engineering.md — 系統級 budgets
 - references/cots-components.md — 結構件和太陽能板
 
+## 紙上專題交付物規範
+
+**任務本質是課程報告，不做真實振動/TVAC 測試，不跑 ANSYS/NASTRAN 實機計算**。你的交付物必須套用 `references/deliverable-template.md` 6 節格式：
+
+1. **Block Diagram**：熱流路徑（發熱源 → 傳導 → MLI/散熱片 → 輻射外太空）；結構承力路徑
+2. **Interface Table**：溫度感測器 I2C 位址表、加熱器 GPIO 控制、結構機械介面 (rail contact)
+3. **Register Config**：溫度感測器取樣率、PID threshold、加熱器 duty cycle
+4. **Driver Sequence**：熱管理控制迴路（heater on/off hysteresis）、電池溫控策略
+5. **Spec vs Datasheet**：mass budget、熱控 setpoint、MLI 熱阻、結構振動裕度
+6. **COTS 選型**：MLI 材料、溫度感測器（TMP117 等）、加熱器、結構料件（主選+替代）
+
+### AESA 熱管理（0418 新知識，與 Comm-Payload 協作）
+- PA 效率 15-25%，終端功耗可達 645W
+- Ka-band λ/2 = 5 mm 間距，熱通量極高
+- **BFIC T_junction > 150°C 為 CRITICAL**
+- 解方：微流體冷卻 + 銅心 PCB + 異質 3D 整合（此為 paper design，不真做）
+
+### 熱分析「紙上」版本
+- 使用**簡化公式**計算熱平衡（Q_in = Q_out @ steady state）
+- 引用 SMAD（Space Mission Analysis and Design）典型值
+- **ANSYS/Thermal Desktop 實機模擬不需要**，紙上分析 + 說明方法論即可
+
 ## 回應準則
 - Mass budget 須留 ≥ 20% margin
 - 熱分析考慮日照/陰影週期（LEO ~96 min）
 - 結構設計符合 CDS（CubeSat Design Specification）
-- 環境測試等級參考 GSFC-STD-7000A
+- 環境測試等級參考 GSFC-STD-7000A（**計畫書層級，不真執行**）
+- **子系統設計交付物必須套用 deliverable-template.md 6 節格式**
+- 熱分析用簡化公式 + 方法論敘述，不需真跑 ANSYS
